@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Postal de Natal 2025</title>
+
+  <!-- Fonte manuscrita -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f4f4f4;
+      color: #111;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 10px 0;
+      font-size: 22px;
+    }
+
+    .hero {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.12);
+      display: block;
+    }
+
+    /* Revelação gradual */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Texto manuscrito */
+    .message {
+      margin-top: 18px;
+      text-align: left;
+      font-family: "Caveat", cursive;
+      font-size: 30px;
+      line-height: 1.1;
+    }
+
+    /* “Caixas” (lacunas) */
+    .blank {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 120px;
+      padding: 6px 12px;
+      margin: 0 4px;
+      border-radius: 10px;
+      border: 2px dashed rgba(0,0,0,0.35);
+      background: rgba(0,0,0,0.03);
+      cursor: pointer;
+      user-select: none;
+      font-weight: 700;
+    }
+
+    .blank.filled {
+      border-style: solid;
+      background: rgba(0,0,0,0.06);
+    }
+
+    /* Dropdown */
+    .dropdown {
+      position: absolute;
+      z-index: 10;
+      width: 180px;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.12);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.14);
+      padding: 8px;
+      display: none;
+    }
+
+    .dropdown button {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      padding: 10px 12px;
+      text-align: left;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .dropdown button:hover {
+      background: rgba(0,0,0,0.06);
+    }
+
+    .hint {
+      margin-top: 10px;
+      font-size: 14px;
+      opacity: .75;
+      text-align: left;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    /* Galeria bloqueada/desbloqueada */
+    .gallery {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      display: none; /* só aparece após acerto */
+    }
+
+    .polaroid {
+      background: #fff;
+      border-radius: 14px;
+      padding: 10px;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.10);
+      border: 1px solid rgba(0,0,0,0.06);
+      transform-origin: center;
+    }
+    .polaroid img {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+    }
+
+    .tilt1 { transform: rotate(-2.2deg); }
+    .tilt2 { transform: rotate( 1.8deg); }
+    .tilt3 { transform: rotate( 2.6deg); }
+    .tilt4 { transform: rotate(-1.6deg); }
+
+    .success {
+      display: none;
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(0, 160, 90, 0.12);
+      border: 1px solid rgba(0, 160, 90, 0.25);
+      text-align: left;
+      font-size: 14px;
+    }
+
+    @media (max-width: 520px) {
+      .gallery { grid-template-columns: 1fr; }
+      .message { font-size: 28px; }
+      .blank { min-width: 105px; }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body { background: #0f0f10; color: #f2f2f2; }
+      .container {
+        background: #1a1a1c;
+        color: #f2f2f2;
+        box-shadow: none;
+        border: 1px solid rgba(255,255,255,0.12);
+      }
+      .dropdown { background: #1a1a1c; border-color: rgba(255,255,255,0.12); }
+      .dropdown button { color: #f2f2f2; }
+      .dropdown button:hover { background: rgba(255,255,255,0.08); }
+      .blank { border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.06); }
+      .blank.filled { background: rgba(255,255,255,0.10); }
+      .polaroid { background: #1a1a1c; border-color: rgba(255,255,255,0.10); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Postal de Natal</h1>
+
+    <!-- 1) Primeiro aparece Img1 -->
+    <img id="img1" class="hero fade-up" src="images/Img1.jpeg" alt="Imagem 1">
+
+    <!-- 2) Depois aparece o texto com as 3 caixas -->
+    <div id="textBlock" class="message fade-up">
+      <div>
+        Mãe, hoje quero que completes esta frase:
+      </div>
+
+      <div style="margin-top: 10px;">
+        I&nbsp;
+        <span class="blank" data-slot="1">[ escolhe ]</span>
+        &nbsp;to&nbsp;
+        <span class="blank" data-slot="2">[ escolhe ]</span>
+        &nbsp;that I&nbsp;
+        <span class="blank" data-slot="3">[ escolhe ]</span>
+        &nbsp;you.
+      </div>
+
+      <div style="margin-top: 16px;">
+        Uma prenda de Natal para a melhor mãe do mundo.
+        Obrigado por tudo o que me ensinaste e por estares sempre comigo.
+      </div>
+
+      <div class="hint">
+        Dica: as opções são sempre as mesmas nas 3 caixas.
+      </div>
+
+      <div id="success" class="success">
+        Certo. Agora já podes ver o resto das memórias.
+      </div>
+    </div>
+
+    <!-- Dropdown flutuante -->
+    <div id="dropdown" class="dropdown" aria-hidden="true"></div>
+
+    <!-- 3) Só aparece quando acertar -->
+    <div id="gallery" class="gallery fade-up">
+      <div class="polaroid tilt1"><img src="images/Img2.jpeg" alt="Imagem 2"></div>
+      <div class="polaroid tilt2"><img src="images/Img3.jpeg" alt="Imagem 3"></div>
+      <div class="polaroid tilt3"><img src="images/Img4.jpeg" alt="Imagem 4"></div>
+      <div class="polaroid tilt4"><img src="images/Img5.jpeg" alt="Imagem 5"></div>
+    </div>
+  </div>
+
+  <script>
+    // Configuração
+    const OPTIONS = ["Imagine", "Say", "Love"];
+    const CORRECT = { 1: "Imagine", 2: "Say", 3: "Love" };
+
+    const dropdown = document.getElementById("dropdown");
+    const blanks = Array.from(document.querySelectorAll(".blank"));
+
+    const state = { 1: null, 2: null, 3: null };
+
+    // Revelação gradual: Img1 -> Texto
+    window.addEventListener("load", () => {
+      const img1 = document.getElementById("img1");
+      const textBlock = document.getElementById("textBlock");
+
+      // mostra Img1
+      requestAnimationFrame(() => img1.classList.add("show"));
+
+      // depois mostra texto
+      setTimeout(() => {
+        textBlock.classList.add("show");
+      }, 650);
+    });
+
+    function closeDropdown() {
+      dropdown.style.display = "none";
+      dropdown.setAttribute("aria-hidden", "true");
+      dropdown.innerHTML = "";
+    }
+
+    function openDropdownFor(blankEl) {
+      closeDropdown();
+
+      // posicionar dropdown por baixo da caixa clicada
+      const rect = blankEl.getBoundingClientRect();
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
+
+      dropdown.style.top = (rect.bottom + scrollTop + 8) + "px";
+      dropdown.style.left = (rect.left + scrollLeft) + "px";
+      dropdown.style.display = "block";
+      dropdown.setAttribute("aria-hidden", "false");
+
+      OPTIONS.forEach(word => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = word;
+        btn.addEventListener("click", () => {
+          const slot = parseInt(blankEl.dataset.slot, 10);
+          state[slot] = word;
+
+          blankEl.textContent = word;
+          blankEl.classList.add("filled");
+
+          closeDropdown();
+          validate();
+        });
+        dropdown.appendChild(btn);
+      });
+    }
+
+    function validate() {
+      const ok = state[1] === CORRECT[1] && state[2] === CORRECT[2] && state[3] === CORRECT[3];
+
+      if (ok) {
+        // feedback
+        document.getElementById("success").style.display = "block";
+
+        // desbloqueia galeria
+        const g = document.getElementById("gallery");
+        g.style.display = "grid";
+        requestAnimationFrame(() => g.classList.add("show"));
+
+        // opcional: fechar dropdown se aberto
+        closeDropdown();
+      } else {
+        document.getElementById("success").style.display = "none";
+      }
+    }
+
+    // Eventos: clicar numa caixa abre dropdown
+    blanks.forEach(b => {
+      b.addEventListener("click", (e) => {
+        e.stopPropagation();
+        openDropdownFor(b);
+      });
+    });
+
+    // Clicar fora fecha
+    document.addEventListener("click", () => closeDropdown());
+
+    // Se fizer scroll e dropdown estiver aberto, fecha (evita posições estranhas)
+    window.addEventListener("scroll", () => closeDropdown(), { passive: true });
+    window.addEventListener("resize", () => closeDropdown());
+  </script>
+</body>
+</html>
